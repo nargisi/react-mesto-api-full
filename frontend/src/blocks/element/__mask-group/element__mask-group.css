@@ -1,0 +1,10 @@
+.element__mask-group {
+    width: 100%;
+    object-fit: cover;
+    margin: 0;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+}

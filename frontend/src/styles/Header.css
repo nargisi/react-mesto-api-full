@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__container{
+display: flex;
+}
+
+.header__email{
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: right;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.header__link {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: right;
+    color: #FFFFFF;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 24px;
+}
+
+.header__link:hover {
+    opacity: 0.6;
+}

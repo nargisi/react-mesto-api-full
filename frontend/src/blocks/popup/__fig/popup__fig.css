@@ -1,0 +1,11 @@
+.popup__fig {
+    max-width: 291px;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFFFFF;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
