@@ -22,7 +22,12 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useCreateIndex: true,
   // useFindAndModify: false,
 });
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://mesto.nargisi.nomoredomains.icu',
+    credentials: true,
+  }),
+);
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -32,21 +37,31 @@ app.use(requestLogger);
 
 app.use('/users', auth, userRoutes);
 app.use('/cards', auth, cardRoutes);
-app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
+app.post(
+  '/signin',
+  celebrate({
+    body: Joi.object().keys({
+      email: Joi.string().required().email(),
+      password: Joi.string().required(),
+    }),
   }),
-}), login);
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string().uri().regex(patternURL),
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }).unknown(true),
-}), createUser);
+  login,
+);
+app.post(
+  '/signup',
+  celebrate({
+    body: Joi.object()
+      .keys({
+        name: Joi.string().min(2).max(30),
+        about: Joi.string().min(2).max(30),
+        avatar: Joi.string().uri().regex(patternURL),
+        email: Joi.string().required().email(),
+        password: Joi.string().required(),
+      })
+      .unknown(true),
+  }),
+  createUser,
+);
 
 app.use((req, res, next) => {
   next(new NotFoundError('Страница не найдена!'));
