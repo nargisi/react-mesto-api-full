@@ -28,12 +28,7 @@ export const autorise = (email, password) => {
     body: JSON.stringify({ email, password }),
   })
     .then((res) => res.json())
-    .then((data) => {
-      if (data.token) {
-        localStorage.setItem('jwt', data.token);
-        return data;
-      }
-    });
+    .then((data) => data);
 };
 
 export const getContent = (token) => {

@@ -19,17 +19,15 @@ const Login = ({ handleLogin }) => {
     auth
       .autorise(email, password)
       .then((data) => {
-        if (!data) {
-          setMessage('Что-то пошло не так! Попробуйте еще раз!');
-        }
-        if (data?.token) {
-          setEmail('');
-          setPassword('');
-          handleLogin();
-          history.push('/');
-        }
+        setEmail('');
+        setPassword('');
+        handleLogin();
+        history.push('/');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setMessage('Что-то пошло не так! Попробуйте еще раз!');
+      });
   };
 
   return (
