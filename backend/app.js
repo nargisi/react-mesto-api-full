@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const { celebrate, Joi } = require('celebrate');
+const cors = require('cors');
 const userRoutes = require('./routes/users');
 const cardRoutes = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
@@ -21,6 +22,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   // useCreateIndex: true,
   // useFindAndModify: false,
 });
+app.use(cors());
 
 app.use(cookieParser());
 app.use(bodyParser.json());

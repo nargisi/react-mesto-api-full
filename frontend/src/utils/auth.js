@@ -1,5 +1,5 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
-
+import { API_CONFIG } from './constants';
+const BASE_URL = API_CONFIG.baseURL;
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
