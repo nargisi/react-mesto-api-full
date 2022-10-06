@@ -24,7 +24,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 app.use(
   cors({
-    origin: '*',
+    origin: ['https://mesto.nargisi.nomoredomains.icu', 'http://localhost:3000'],
     credentials: true,
   }),
 );
