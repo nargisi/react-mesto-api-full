@@ -72,7 +72,7 @@ class Api {
 }
 
 const getToken = ()=> {
-  return localStorage.getItem('jwt');
+  return `Bearer ${localStorage.getItem('jwt')}`;
 }
 
 const api = new Api(API_CONFIG);
