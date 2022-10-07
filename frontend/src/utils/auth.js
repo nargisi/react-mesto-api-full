@@ -30,7 +30,12 @@ export const autorise = (email, password) => {
     body: JSON.stringify({ email, password }),
   })
     .then((res) => res.json())
-    .then((data) => data);
+    .then((data) => {
+      if (data.token) {
+        localStorage.setItem('jwt', data.token);
+        return data;
+      }
+    });
 };
 
 export const getContent = (token) => {
@@ -39,7 +44,7 @@ export const getContent = (token) => {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      'authorization': `Bearer ${token}`,
     },
   })
     .then((res) => res.json())

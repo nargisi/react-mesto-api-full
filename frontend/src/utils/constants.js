@@ -32,8 +32,8 @@ export const editAvatar = document.querySelector('.profile__edit');
 
 export const API_CONFIG = {
   baseURL: 'https://api.mesto.nargisi.nomoredomains.icu',
-  // headers: {
+  headers: {
   //   authorization: '413ddd3a-fff9-444b-99b1-64e1cf71ff3f',
-  //   'Content-Type': 'application/json',
-  // },
+    'Content-Type': 'application/json',
+  },
 };

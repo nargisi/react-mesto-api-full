@@ -47,14 +47,14 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
-      .changeCardLike(card._id, !isLiked)
+      .changeCardLike(card._id, !isLiked) 
       .then((newCard) => {
         // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
-        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        const newCards = cards.map((c) => (c._id === card._id ? newCard.data : c));
         // Обновляем стейт
         setCards(newCards);
       })
@@ -64,7 +64,7 @@ function App() {
   }
 
   function handleCardDelete(deletedCard) {
-    const isOwn = deletedCard.owner._id === currentUser._id;
+    const isOwn = deletedCard.owner === currentUser._id;
     if (isOwn) {
       api
         .deleteOwnCard(deletedCard._id)
@@ -110,7 +110,7 @@ function App() {
       api
         .getInitialCards()
         .then((cardsData) => {
-          setCards(cardsData);
+          setCards(cardsData.data);
         })
         .catch((err) => {
           console.log(err);
@@ -119,7 +119,7 @@ function App() {
       api
         .getUserInfo()
         .then((userData) => {
-          setCurrentUser((prevState) => ({ ...prevState, ...userData }));
+          setCurrentUser((prevState) => ({ ...prevState, ...userData.data }));
         })
         .catch((err) => {
           console.log(err);
@@ -156,8 +156,8 @@ function App() {
   const handleUpdateUser = ({ name, job }) => {
     api
       .updateProfile({ name, job })
-      .then(({ name, about: description }) => {
-        setCurrentUser({ ...currentUser, name, about: description });
+      .then((res) => {
+        setCurrentUser({ ...currentUser, name: res.data.name,  about: res.data.about});
         handleCloseAllPopups();
       })
       .catch((err) => {
@@ -168,8 +168,8 @@ function App() {
   const handleUpdateAvatar = (link) => {
     api
       .editUserAvatar(link)
-      .then(({ avatar }) => {
-        setCurrentUser({ ...currentUser, avatar });
+      .then(() => {
+        setCurrentUser({ ...currentUser, avatar:link });
         handleCloseAllPopups();
       })
       .catch((err) => {
@@ -180,8 +180,8 @@ function App() {
   const handleAddPlaceSubmit = ({ place, href }) => {
     api
       .addNewCard({ place, href })
-      .then((newCard) => {
-        setCards([newCard, ...cards]);
+      .then((res) => {
+        setCards([res.data, ...cards]);
         handleCloseAllPopups();
       })
       .catch((err) => {

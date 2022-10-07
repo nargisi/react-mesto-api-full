@@ -15,14 +15,14 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this._baseURL}/users/me`, {
-      headers: this._headers,
+      headers: {...this._headers, authorization: getToken()},
       credentials: 'include',
     }).then(this._checkResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._baseURL}/cards`, {
-      headers: this._headers,
+      headers: {...this._headers, authorization: getToken()},
       credentials: 'include',
     }).then(this._checkResponse);
   }
@@ -31,7 +31,7 @@ class Api {
     return fetch(`${this._baseURL}/users/me`, {
       method: 'PATCH',
       credentials: 'include',
-      headers: this._headers,
+      headers: {...this._headers, authorization: getToken()},
       body: JSON.stringify({ name, about: job }),
     }).then(this._checkResponse);
   }
@@ -40,7 +40,7 @@ class Api {
     return fetch(`${this._baseURL}/cards`, {
       method: 'POST',
       credentials: 'include',
-      headers: this._headers,
+      headers: {...this._headers, authorization: getToken()},
       body: JSON.stringify({ name: place, link: href }),
     }).then(this._checkResponse);
   }
@@ -49,26 +49,30 @@ class Api {
     return fetch(`${this._baseURL}/cards/${id}`, {
       method: 'DELETE',
       credentials: 'include',
-      headers: this._headers,
+      headers: {...this._headers, authorization: getToken()},
     }).then(this._checkResponse);
   }
 
-  editUserAvatar(avatar) {
+  editUserAvatar({avatar}) {
     return fetch(`${this._baseURL}/users/me/avatar`, {
       method: 'PATCH',
       credentials: 'include',
-      headers: this._headers,
+      headers: {...this._headers, authorization: getToken()},
       body: JSON.stringify({ avatar: avatar }),
     }).then(this._checkResponse);
   }
 
   changeCardLike(id, isLiked) {
-    return fetch(`${this._baseURL}/cards/likes/${id}`, {
+    return fetch(`${this._baseURL}/cards/${id}/likes`, {
       method: isLiked ? 'PUT' : 'DELETE',
       credentials: 'include',
-      headers: this._headers,
+      headers: {...this._headers, authorization: getToken()},
     }).then(this._checkResponse);
   }
+}
+
+const getToken = ()=> {
+  return localStorage.getItem('jwt');
 }
 
 const api = new Api(API_CONFIG);
