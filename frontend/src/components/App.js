@@ -96,6 +96,7 @@ function App() {
           }
         })
         .catch((err) => {
+          history.push('/sign-in')
           console.log(err);
         });
     }

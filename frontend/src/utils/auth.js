@@ -1,5 +1,6 @@
 import { API_CONFIG } from './constants';
 const BASE_URL = API_CONFIG.baseURL;
+
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
@@ -12,6 +13,9 @@ export const register = (email, password) => {
     .then((res) => {
       if (res.status === 400) {
         throw new Error('Bad response from server');
+      }
+      if (res.status === 409) {
+        throw new Error('Такой пользователь уже существует');
       }
       return res.json();
     })
@@ -48,6 +52,11 @@ export const getContent = (token) => {
       'authorization': `Bearer ${token}`,
     },
   })
-    .then((res) => res.json())
+    .then((res) => {
+      if (res.status === 401) {
+        throw new Error('Invalid token');
+      }
+      return res.json()
+    })
     .then((data) => data);
 };
