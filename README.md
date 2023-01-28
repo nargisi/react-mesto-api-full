@@ -1,29 +1,20 @@
-# react-mesto-api-full
+### react-mesto-api-full
 
-# Проект: Место-Реакт с авторизацией и регистрацией (фронтенд + бэкенд)
+## Stack: React.js, React Context, JS, Flexbox, Grid Layout
 
-### Место - это интерактивный проект, куда можно добавлять фотографии, удалять их и ставить лайки.
+This is an interactive project where you can add photos, delete them and put likes.
 
-Проект написан с ипользованием библиотеки React, React Hooks, также реализована адаптивная верстка под различные экраны устройств, применены технологии Flexbox и СSS Grid Layout.
+1. `frontend/` — app's part on React.js.
+2. `backend/` — app's part on Node.JS.
 
-Проект собран с помощью Webpack.
+## How to run backend (go to the folder 'backend'):
 
-Чтобы пользоваться сервисом, пользователю необходимо пройти регистрацию и авторизацию. Основной контент защищен от неавторизованных пользователей с помощью Protected Route.
+`npm run start` — start server
+`npm run dev` — start server with hot-reload
 
-Backend приложения написан на NodeJS с помощью фреймворка Express.
+## How to run frontend (go to the folder 'frontend'):
 
-## Директории
+`npm start` — start app for developing
+`npm build` — build app for production
 
-1. `frontend/` — часть приложения, написанная на React.
-2. `backend/` — часть приложения, написанная на NodeJS.
-
-## Запуск проекта
-
-`npm run start` — запускает сервер  
-`npm run dev` — запускает сервер с hot-reload
-
-## Как найти сервер
-
-IP 130.193.55.35
-Frontend https://mesto.nargisi.nomoredomains.icu/
-Backend https://api.mesto.nargisi.nomoredomains.icu/
+[Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
